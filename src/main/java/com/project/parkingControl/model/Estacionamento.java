@@ -18,14 +18,14 @@ public class Estacionamento
     private String pagamento;
     @ManyToOne
     @JoinColumn(name = "veiculo_fk")
-    private Veiculo veiculo;
+    private Veiculo placa;
 
     public Veiculo getVeiculo() {
-        return veiculo;
+        return placa;
     }
 
     public void setVeiculo(Veiculo veiculo) {
-        this.veiculo = veiculo;
+        this.placa = placa;
     }
 
     public int getId() {

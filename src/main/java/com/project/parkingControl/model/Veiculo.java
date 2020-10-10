@@ -5,6 +5,8 @@ import javax.persistence.*;
 public class Veiculo
 {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     @Column(unique=true)
     private String placa;
     @Column
