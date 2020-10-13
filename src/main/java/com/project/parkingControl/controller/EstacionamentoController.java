@@ -63,14 +63,13 @@ public class EstacionamentoController
 
     //Saida
     @RequestMapping(value = "estacionamentos/{idReserva}/saida", method = RequestMethod.PUT) @Transactional
-    public ResponseEntity<SaidaDto> sair(@PathVariable Integer idReserva, @RequestBody @Valid SaidaForm form) {
-        SaidaDto saidaDto = estacionamentoService.sair(idReserva);
+    public ResponseEntity<Boolean> sair(@PathVariable Integer idReserva, @RequestBody @Valid SaidaForm form) {
         try {
-            return ResponseEntity.ok(saidaDto);
-        }catch (Exception ex){
+            return ResponseEntity.ok(estacionamentoService.sair(idReserva));
+        } catch (Exception ex) {
             System.out.println(ex);
-            return ResponseEntity.notFound().build();}
-
+            return ResponseEntity.notFound().build();
+        }
     }
 
     //Historico
