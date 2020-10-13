@@ -1,14 +1,15 @@
 package com.project.parkingControl.controller;
 
-import com.project.parkingControl.controller.dto.ConsultaHistoricoDto;
-import com.project.parkingControl.controller.dto.EntradaDto;
-import com.project.parkingControl.controller.dto.PagamentoDto;
-import com.project.parkingControl.controller.dto.SaidaDto;
-import com.project.parkingControl.controller.form.EntradaForm;
-import com.project.parkingControl.controller.form.PagamentoForm;
-import com.project.parkingControl.controller.form.SaidaForm;
+import com.project.parkingControl.dto.ConsultaHistoricoDto;
+import com.project.parkingControl.dto.EntradaDto;
+import com.project.parkingControl.dto.PagamentoDto;
+import com.project.parkingControl.dto.SaidaDto;
+import com.project.parkingControl.form.EntradaForm;
+import com.project.parkingControl.form.PagamentoForm;
+import com.project.parkingControl.form.SaidaForm;
 import com.project.parkingControl.model.Estacionamento;
 import com.project.parkingControl.repository.EstacionamentoRepository;
+import com.project.parkingControl.service.EstacionamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -25,6 +25,9 @@ public class EstacionamentoController
 {
     @Autowired
     private EstacionamentoRepository estacionamentoRepository;
+
+    @Autowired
+    private EstacionamentoService estacionamentoService;
 
     //lista teste com entradas realizadas
     /*@RequestMapping(value = "/estacionamentos", method = RequestMethod.GET) @ResponseBody
@@ -61,13 +64,13 @@ public class EstacionamentoController
     //Saida
     @RequestMapping(value = "estacionamentos/{idReserva}/saida", method = RequestMethod.PUT) @Transactional
     public ResponseEntity<SaidaDto> sair(@PathVariable Integer idReserva, @RequestBody @Valid SaidaForm form) {
-        Estacionamento estacionamento  = estacionamentoRepository.findByIdReserva(idReserva);
+        SaidaDto saidaDto = estacionamentoService.sair(idReserva);
+        try {
+            return ResponseEntity.ok(saidaDto);
+        }catch (Exception ex){
+            System.out.println(ex);
+            return ResponseEntity.notFound().build();}
 
-        if(estacionamento.getPagamento()) {
-                /*Estacionamento*/ estacionamento = form.editarEstacionamentoComSaida(idReserva, estacionamentoRepository);
-                return ResponseEntity.ok(new SaidaDto(estacionamento));
-        }
-        return ResponseEntity.notFound().build();
     }
 
     //Historico

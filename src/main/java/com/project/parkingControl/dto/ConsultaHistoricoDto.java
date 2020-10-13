@@ -1,4 +1,4 @@
-package com.project.parkingControl.controller.dto;
+package com.project.parkingControl.dto;
 
 import com.project.parkingControl.model.Estacionamento;
 

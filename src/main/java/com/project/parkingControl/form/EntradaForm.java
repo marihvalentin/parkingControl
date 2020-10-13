@@ -1,4 +1,4 @@
-package com.project.parkingControl.controller.form;
+package com.project.parkingControl.form;
 
 import com.project.parkingControl.model.Estacionamento;
 

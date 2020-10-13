@@ -1,9 +1,8 @@
-package com.project.parkingControl.controller.form;
+package com.project.parkingControl.form;
 
 import com.project.parkingControl.model.Estacionamento;
 import com.project.parkingControl.repository.EstacionamentoRepository;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class PagamentoForm
