@@ -1,33 +1,44 @@
 package com.project.parkingControl.controller.dto;
 
-public class EstacionamentoDto
-{
-    private int id;
-    private String tempoPermanencia;
-    private boolean pago;
-    private boolean saida;
+import com.project.parkingControl.model.Estacionamento;
 
-    public EstacionamentoDto(int id, String tempoPermanencia, boolean pago, boolean saida)
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class ConsultaHistoricoDto
+{
+    private Integer idReserva;
+    private LocalDateTime tempoPermanencia;
+    private boolean pago;
+    private boolean saiu;
+
+    public ConsultaHistoricoDto(Estacionamento estacionamento)
     {
-        this.id = id;
-        this.tempoPermanencia = tempoPermanencia;
-        this.pago = pago;
-        this.saida = saida;
+        this.idReserva = estacionamento.getIdReserva();
+        this.tempoPermanencia = estacionamento.getTempoPermanencia();
+        this.pago = estacionamento.getPagamento();
+        this.saiu = estacionamento.getSaida();
+    }
+
+    public static List<EntradaDto> converter(List<Estacionamento> estacionamentos)
+    {
+        return estacionamentos.stream().map(EntradaDto::new).collect(Collectors.toList());
     }
 
     public int getId() {
-        return id;
+        return idReserva;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idReserva = idReserva;
     }
 
-    public String getTempoPermanencia() {
+    public LocalDateTime getTempoPermanencia() {
         return tempoPermanencia;
     }
 
-    public void setTempoPermanencia(String tempoPermanencia) {
+    public void setTempoPermanencia(LocalDateTime tempoPermanencia) {
         this.tempoPermanencia = tempoPermanencia;
     }
 
@@ -39,11 +50,12 @@ public class EstacionamentoDto
         this.pago = pago;
     }
 
-    public boolean isSaida() {
-        return saida;
+    public boolean isSaiu() {
+        return saiu;
     }
 
-    public void setSaida(boolean saida) {
-        this.saida = saida;
+    public void setSaiu(boolean saiu) {
+        this.saiu = saiu;
     }
+
 }
