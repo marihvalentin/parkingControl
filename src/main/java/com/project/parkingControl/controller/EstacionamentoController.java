@@ -50,29 +50,23 @@ public class EstacionamentoController
     @RequestMapping(value = "estacionamentos/{idReserva}/pagamento", method = RequestMethod.PUT) @Transactional
     public ResponseEntity<PagamentoDto> pagar(@PathVariable Integer idReserva, @RequestBody @Valid PagamentoForm form)
     {
-        Optional<Estacionamento> optional = estacionamentoRepository.findByIdReserva(idReserva);
-        if(optional.isPresent())
-        {
-            Estacionamento estacionamento = form.editarEstacionamentoComPagamento(idReserva, estacionamentoRepository);
+        Estacionamento estacionamento = estacionamentoRepository.findByIdReserva(idReserva);
+
+            /*Estacionamento*/ estacionamento = form.editarEstacionamentoComPagamento(idReserva, estacionamentoRepository);
             return ResponseEntity.ok(new PagamentoDto(estacionamento));
-        }
-        return ResponseEntity.notFound().build();
+
+        //return ResponseEntity.notFound().build();
     }
 
     //Saida
     @RequestMapping(value = "estacionamentos/{idReserva}/saida", method = RequestMethod.PUT) @Transactional
-    public ResponseEntity<SaidaDto> sair(@PathVariable Integer idReserva, @RequestBody @Valid SaidaForm form,
-                                         Estacionamento pagamento)
-    {
-        Optional<Estacionamento> optional = estacionamentoRepository.findByIdReserva(idReserva);
+    public ResponseEntity<SaidaDto> sair(@PathVariable Integer idReserva, @RequestBody @Valid SaidaForm form) {
+        Estacionamento estacionamento  = estacionamentoRepository.findByIdReserva(idReserva);
 
-        /*if(pagamento.getPagamento())
-        { logica não funcionou como esperado*/
-            if (optional.isPresent()) {
-                Estacionamento estacionamento = form.editarEstacionamentoComSaida(idReserva, estacionamentoRepository);
+        if(estacionamento.getPagamento()) {
+                /*Estacionamento*/ estacionamento = form.editarEstacionamentoComSaida(idReserva, estacionamentoRepository);
                 return ResponseEntity.ok(new SaidaDto(estacionamento));
-            }
-        //}
+        }
         return ResponseEntity.notFound().build();
     }
 
