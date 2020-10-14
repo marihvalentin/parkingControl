@@ -1,6 +1,10 @@
 package com.project.parkingControl.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 @Entity(name = "estacionamento")
@@ -10,10 +14,10 @@ public class Estacionamento
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idReserva;
     private String placaVeiculo;
-    private LocalDateTime entrada = LocalDateTime.now();
+    private LocalDateTime entrada;
     private Boolean saida = false;
-    //private LocalDateTime momentoSaida;
-    private LocalDateTime tempoPermanencia = LocalDateTime.now().plusMinutes(25);
+    private LocalDateTime momentoSaida;
+    private Duration tempoPermanencia;
     private Boolean pagamento = false;
 
     public Estacionamento()
@@ -59,21 +63,13 @@ public class Estacionamento
         this.saida = saida;
     }
 
-    public LocalDateTime getTempoPermanencia() {
+    public Duration getTempoPermanencia() {
         return tempoPermanencia;
     }
 
-    public void setTempoPermanencia(LocalDateTime tempoPermanencia) {
+    public void setTempoPermanencia(Duration tempoPermanencia) {
         this.tempoPermanencia = tempoPermanencia;
     }
-
-    /*public LocalDateTime getMomentoSaida() {
-        return momentoSaida;
-    }
-
-    public void setMomentoSaida(LocalDateTime momentoSaida) {
-        this.momentoSaida = momentoSaida;
-    }*/
 
     public Boolean getPagamento() {
         return pagamento;
@@ -83,6 +79,11 @@ public class Estacionamento
         this.pagamento = pagamento;
     }
 
+    public LocalDateTime getMomentoSaida() {
+        return momentoSaida;
+    }
 
-
+    public void setMomentoSaida(LocalDateTime momentoSaida) {
+        this.momentoSaida = momentoSaida;
+    }
 }

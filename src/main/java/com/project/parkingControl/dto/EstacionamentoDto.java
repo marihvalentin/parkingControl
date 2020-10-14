@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class EntradaDto
+public class EstacionamentoDto
 {
     private Integer idReserva;
     private String placaVeiculo;
@@ -14,7 +14,7 @@ public class EntradaDto
     /*private boolean pagamento;
     private boolean saida;*/
 
-    public EntradaDto(Estacionamento estacionamento)
+    public EstacionamentoDto(Estacionamento estacionamento)
     {
         this.idReserva = estacionamento.getIdReserva();
         this.placaVeiculo = estacionamento.getPlacaVeiculo();
@@ -43,8 +43,8 @@ public class EntradaDto
         return saida;
     }*/
 
-    public static List<EntradaDto> converter(List<Estacionamento> estacionamentos) {
-        return estacionamentos.stream().map(EntradaDto::new).collect(Collectors.toList());
+    public static List<EstacionamentoDto> converter(List<Estacionamento> estacionamentos) {
+        return estacionamentos.stream().map(EstacionamentoDto::new).collect(Collectors.toList());
     }
 
 }
