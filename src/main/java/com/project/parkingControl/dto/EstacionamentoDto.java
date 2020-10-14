@@ -11,16 +11,16 @@ public class EstacionamentoDto
     private Integer idReserva;
     private String placaVeiculo;
     private LocalDateTime entrada;
-    /*private boolean pagamento;
-    private boolean saida;*/
 
     public EstacionamentoDto(Estacionamento estacionamento)
     {
         this.idReserva = estacionamento.getIdReserva();
         this.placaVeiculo = estacionamento.getPlacaVeiculo();
         this.entrada = estacionamento.getEntrada();
-        /*this.pagamento = estacionamento.getPagamento();
-        this.saida = estacionamento.getSaida();*/
+    }
+
+    public EstacionamentoDto() {
+
     }
 
     public Integer getIdReserva() {
@@ -35,13 +35,6 @@ public class EstacionamentoDto
         return entrada;
     }
 
-    /*public boolean isPagamento() {
-        return pagamento;
-    }
-
-    public boolean isSaida() {
-        return saida;
-    }*/
 
     public static List<EstacionamentoDto> converter(List<Estacionamento> estacionamentos) {
         return estacionamentos.stream().map(EstacionamentoDto::new).collect(Collectors.toList());

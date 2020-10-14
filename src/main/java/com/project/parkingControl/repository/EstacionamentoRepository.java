@@ -9,6 +9,6 @@ public interface EstacionamentoRepository extends JpaRepository<Estacionamento, 
 
     Estacionamento findByIdReserva(Integer idReserva);
 
-    Estacionamento findByPlacaVeiculo(String placaVeiculo);
+    Optional<Estacionamento> findByPlacaVeiculo(String placaVeiculo);
 
 }

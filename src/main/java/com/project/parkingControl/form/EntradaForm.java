@@ -25,23 +25,4 @@ public class EntradaForm
         return new Estacionamento(placaVeiculo);
     }
 
-    public Boolean validaPlaca(String placaVeiculo)
-    {
-        boolean result = false;
-
-        Pattern pattern = Pattern.compile("[A-Z]{3}-\\d{4}");
-        Matcher mat = pattern.matcher(placaVeiculo);
-
-        if (!mat.matches())
-        {
-            result = false;
-        }
-        else
-        {
-            result = true;
-        }
-        return result;
-    }
-
-
 }

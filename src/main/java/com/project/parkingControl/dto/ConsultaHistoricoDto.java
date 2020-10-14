@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.project.parkingControl.model.Estacionamento;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,8 +16,19 @@ public class ConsultaHistoricoDto
     private boolean pago;
     private boolean saiu;
 
-    public ConsultaHistoricoDto() {
-
+    public ConsultaHistoricoDto(Estacionamento estacionamento) {
+        this.id = estacionamento.getIdReserva();
+        if(estacionamento.getMomentoSaida() != null)
+        {
+            this.tempoPermanencia = Duration.between(estacionamento.getEntrada(), estacionamento.getMomentoSaida());
+        }
+        else
+        {
+            LocalDateTime atual = LocalDateTime.now();
+            this.tempoPermanencia = Duration.between(atual, estacionamento.getEntrada());
+        }
+        this.pago = estacionamento.getPagamento();
+        this.saiu = estacionamento.getSaida();
     }
 
     public static List<EstacionamentoDto> converter(List<Estacionamento> estacionamentos)
@@ -56,10 +68,4 @@ public class ConsultaHistoricoDto
         this.saiu = saiu;
     }
 
-    public void build(Estacionamento estacionamento) {
-        this.id = estacionamento.getIdReserva();
-        this.tempoPermanencia = estacionamento.getTempoPermanencia();
-        this.pago = estacionamento.getPagamento();
-        this.saiu = estacionamento.getSaida();
-    }
 }
